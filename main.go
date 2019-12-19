@@ -2,13 +2,20 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/user"
 
-	"github.com/mikunup/go-monkey/lexer"
+	"github.com/mikunup/go-monkey/repl"
 )
 
 func main() {
-	fmt.Println("vim-go")
+	user, err := user.Current()
 
-	l := lexer.New("i")
-	fmt.Println(l)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Hello %s This is the Monkey programming language! \n", user.Username)
+	fmt.Println("feel free to type in commands\n")
+	repl.Start(os.Stdin, os.Stdout)
 }
